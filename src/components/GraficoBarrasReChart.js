@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BarChart, CartesianGrid, ResponsiveContainer, XAxis,Bar, YAxis, Tooltip, Legend } from 'recharts'
 import { Dropdown } from 'primereact/dropdown';
+import { Calendar } from 'primereact/calendar';
+        
 import { Button } from 'primereact/button';
 
 
@@ -96,12 +98,39 @@ const GraficoBarrasReChart = () => {
 
     return(
         <div>
+            <Dropdown 
+            value={currentData === Santander ? "Santander" : currentData === Falabella ? "Falabella" : null} 
+            options={[
+                { label: 'Santander', value: 'Santander' },
+                { label: 'Falabella', value: 'Falabella' },
+                { label: 'Otro Banco 1', value: 'Otro Banco 1' },
+                { label: 'Otro Banco 2', value: 'Otro Banco 2' },
+            ]} 
+            onChange={(e) => toggleDataPrueba({ target: { value: e.value } })}
+            placeholder="Seleccione un banco"
+            className="w-full md:w-14rem"
+            />
+
             <select onChange={toggleDataPrueba}>
                 <option value="Santander">Santander</option>
                 <option value="Falabella">Falabella</option>
             </select>
-            <br></br>
-            <select onChange={(event) => setFiltroPorFechas(event.target.value)}>
+
+            <Dropdown value={filtroPorFechas}
+                options={[
+                { label: '-', value: '' },
+                { label: 'Por mes', value: 'mes' },
+                { label: 'Por Día', value: 'busquedaDia' },
+                { label: 'Ultimas 24 horas', value: 'Ultimas24horas' },
+                { label: 'Rango de Fechas', value: 'rangoFechas' },
+                { label: 'Ultimos 30 Días', value: 'ultimos30Dias' },
+                { label: 'Año anterior', value: 'añoAnterior' },
+                { label: 'Ultimos 5 años', value: 'ultimos5Años' },
+                ]}
+                onChange={(e) => setFiltroPorFechas(e.value)}
+                placeholder="Seleccione un filtro de fecha"
+            />
+            {/* <select onChange={(event) => setFiltroPorFechas(event.target.value)}>
                 <option value="" style={{ textAlign: 'center' }}>-</option>
                 <option value="mes">Por mes</option>
                 <option value="busquedaDia">Por Dia</option>
@@ -110,18 +139,27 @@ const GraficoBarrasReChart = () => {
                 <option value="ultimos30Dias">Ultimos 30 Dias</option>
                 <option value="añoAnterior">Año anterior</option>
                 <option value="ultimos5Años">Ultimos 5 años</option>
-            </select>
+            </select> */}
             
-            {filtroPorFechas === "mes" && (
+            {/* {filtroPorFechas === "mes" && (
                 <select value={mesSeleccionado} onChange={e => setMesSeleccionado(e.target.value)}>
                 <option value="">Seleccione un mes</option>
                 {meses.map(mes => (
                     <option key={mes} value={mes}>{mes}</option>
                 ))}
                 </select>
+            )} */}
+
+            {filtroPorFechas === 'mes' && (
+            <Dropdown value={mesSeleccionado}
+                options={meses.map((mes) => ({ label: mes, value: mes }))}
+                onChange={(e) => setMesSeleccionado(e.value)}
+                placeholder="Seleccione un mes"
+                />
             )}
+
             <br></br>
-            {filtroPorFechas === "rangoFechas" && (
+            {/* {filtroPorFechas === "rangoFechas" && (
                     <>
                     <label htmlFor="desde">Desde:</label>
                     <input
@@ -140,8 +178,26 @@ const GraficoBarrasReChart = () => {
                     />
                     </>
                 )}
-            
-            {filtroPorFechas === "busquedaDia" && (
+             */}
+              {filtroPorFechas === 'rangoFechas' && (
+                    <>
+                    <label htmlFor="rangoFechas">Selecciona un rango de fechas:</label>
+                    <Calendar
+                        id="rangoFechas"
+                        value={rangoFechas.desde}
+                        onChange={(e) => setRangoFechas({ ...rangoFechas, desde: e.value })}
+                        showIcon
+                    />
+                    <Calendar
+                        id="rangoFechas"
+                        value={rangoFechas.hasta}
+                        onChange={(e) => setRangoFechas({ ...rangoFechas, hasta: e.value })}
+                        showIcon
+                    />
+                    </>
+                )}
+
+            {/* {filtroPorFechas === "busquedaDia" && (
                     <>
                         <label htmlFor="diaSelecionado">Selecciona un día:</label>
                         <input
@@ -151,9 +207,22 @@ const GraficoBarrasReChart = () => {
                         onChange={(e) => setdiaSelecionado(e.target.value)}
                         />
                     </>
-                )}
+                )} */}
 
-            <ResponsiveContainer width="100%" aspect={2}>
+                {filtroPorFechas === 'busquedaDia' && (
+                        <>
+                        <label htmlFor="diaSelecionado">Selecciona un día:</label>
+                        <Calendar
+                            id="diaSelecionado"
+                            value={diaSelecionado}
+                            onChange={(e) => setdiaSelecionado(e.value)}
+                            dateFormat="yy-mm-dd"
+                            showIcon
+                        />
+                        </>
+                    )}    
+
+            <ResponsiveContainer width="100%" aspect={1.5}>
                 <BarChart 
                 data={TiposFechas} 
                 width={400} 
@@ -166,8 +235,8 @@ const GraficoBarrasReChart = () => {
                 }}
                 >
                 {showPlaceholder ? (
-                     <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" fontSize={40} fill="#999">
-                     No existen datos para la fecha seleccionada
+                     <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" fontSize={20} fill="#999">
+                     No existen datos para el banco
                    </text>
                 ) : (
                     <>

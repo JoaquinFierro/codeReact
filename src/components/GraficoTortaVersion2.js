@@ -62,12 +62,13 @@ const toggleData = (event) => {
 //   };
 
   return (
-    <div style={{ width: '100%', height: 300 }}>
-      <Button label="Primary"/>
+    // <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+
+    <div style={{ width: '100%', height: '80%'}}>
+
       <button onClick={() => toggleDataBotones(data)}>Banco Bci</button>
       <button onClick={() => toggleDataBotones(data2)}>Banco Santander</button>
       <button onClick={() => toggleDataBotones(data3)}>Bancos</button>
-    <br></br><br></br>
 
        <select onChange={toggleData}>
         <option value="data">Banco Bci</option>
@@ -75,24 +76,24 @@ const toggleData = (event) => {
         <option value="data3">Bancos</option>
       </select>
 
-      <ResponsiveContainer>
-        <PieChart width={400} height={200}>
-          <Pie
-            data={currentData}
-            dataKey="value"
-            innerRadius={70}
-            outerRadius={125}
-            fill="#82ca9d"
-          >
-            {currentData.map((entry, index) => (
-              <Cell key={`cell=${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Legend />
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={currentData}
+              dataKey="value"
+              innerRadius={70}
+              outerRadius={125}
+              fill="#82ca9d"
+            >
+              {currentData.map((entry, index) => (
+                <Cell key={`cell=${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Legend />
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
   );
 };
 

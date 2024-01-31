@@ -60,43 +60,44 @@ const toggleData = (event) => {
 
 
   return (
-    <div style={{ width: '100%', height: 300 }}>
+    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Button label="Primary"/>
-      <button className="buttonStyle" onClick={toggleDataBotones}>Banco Bci</button>
-      <button onClick={toggleDataBotones}>Banco Santander</button>
-      <button onClick={toggleDataBotones}>Bancos</button>
-    <br></br><br></br>
+        <button className="buttonStyle" onClick={toggleDataBotones}>Banco Bci</button>
+        <button onClick={toggleDataBotones}>Banco Santander</button>
+        <button onClick={toggleDataBotones}>Bancos</button>
+        <br></br><br></br>
 
-       <select onChange={toggleData}>
-        <option value="data">Banco Bci</option>
-        <option value="data2">Banco Santander</option>
-        <option value="data3">Bancos</option>
-      </select>
+        <select onChange={toggleData}>
+          <option value="data">Banco Bci</option>
+          <option value="data2">Banco Santander</option>
+          <option value="data3">Bancos</option>
+        </select>
 
-      <select onChange={toggleDataPrueba}>
-        {data3.map((banco, index) => (
-          <option key={index} value={banco.name}>{banco.name}</option>
-        ))}
-      </select>
-
-      <ResponsiveContainer>
-        <PieChart>
-          <Pie
-            data={currentData}
-            dataKey="value"
-            innerRadius={70}
-            outerRadius={125}
-            fill="#82ca9d"
-          >
-            {currentData.map((entry, index) => (
-              <Cell key={`cell=${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Legend />
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
+        <select onChange={toggleDataPrueba}>
+          {data3.map((banco, index) => (
+            <option key={index} value={banco.name}>{banco.name}</option>
+          ))}
+        </select>
+        <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={currentData}
+                dataKey="value"
+                innerRadius={70}
+                outerRadius={125}
+                fill="#82ca9d"
+              >
+                {currentData.map((entry, index) => (
+                  <Cell key={`cell=${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Legend />
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
   );
 };
 

@@ -116,7 +116,7 @@ const GraficoBarrasReChart = () => {
             {/* <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={Itau} optionLabel="name" 
                 placeholder="Select a City" className="w-full md:w-14rem"  /> */}
             <br></br>
-            
+
             <select onChange={(event) => setFiltroPorFechas(event.target.value)}>
                 <option value="" style={{ textAlign: 'center' }}>-</option>
                 <option value="mes">Por mes</option>
@@ -158,7 +158,7 @@ const GraficoBarrasReChart = () => {
         
             {/* <input type="date" value={filroDiaEspecifico} onChange={e => setSelectedDate(e.target.value)} /> */}
 
-            <ResponsiveContainer width="100%" aspect={2}>
+            <ResponsiveContainer width="100%" aspect={1.5}>
                 <BarChart 
                 data={TiposFechas} 
                 width={600} 
