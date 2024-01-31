@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import GraficoTortaReChart from "./components/GraficoTortaReChart.js";
+import GraficoTortaVersion2 from "./components/GraficoTortaVersion2.js";
+import {DonutDatasetTransition}  from "./components/DonutDatasetTransition.tsx";
+import GraficoBarrasReChart from "./components/GraficoBarrasReChart.js";
+import GraficoBarrasVersion2 from "./components/GraficoBarrasVersion2.js";
+import TablaTop10 from "./components/TablaTop10.js";
+// import TablaTop10V2 from "./components/TablaTop10V2.js";
+import React from 'react';
+import ComponentePadre from './components/componentePadre.js';
+
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+return (
+<div>
+  <div>
+  <ComponentePadre/>
+  </div>
+</div>
+
+
+
   );
+
 }
 
 export default App;
