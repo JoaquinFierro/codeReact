@@ -95,6 +95,7 @@ const GraficoBarrasReChart = () => {
     const TiposFechas = currentData.filter((item) => {
         return filtrarPorFecha(item, filtroPorFechas, rangoFechas);
       });
+    console.log(diaSelecionado,"diaseleccioando");
 
     return(
         <div>
@@ -110,11 +111,6 @@ const GraficoBarrasReChart = () => {
             placeholder="Seleccione un banco"
             className="w-full md:w-14rem"
             />
-
-            <select onChange={toggleDataPrueba}>
-                <option value="Santander">Santander</option>
-                <option value="Falabella">Falabella</option>
-            </select>
 
             <Dropdown value={filtroPorFechas}
                 options={[
@@ -196,8 +192,8 @@ const GraficoBarrasReChart = () => {
                     />
                     </>
                 )}
-
-            {/* {filtroPorFechas === "busquedaDia" && (
+            {/* este funciona correctamente, pero el nuevo de primeflex, no funcioa bien por el formato que devuelve */}
+            {filtroPorFechas === "busquedaDia" && (
                     <>
                         <label htmlFor="diaSelecionado">Selecciona un día:</label>
                         <input
@@ -207,7 +203,7 @@ const GraficoBarrasReChart = () => {
                         onChange={(e) => setdiaSelecionado(e.target.value)}
                         />
                     </>
-                )} */}
+                )}
 
                 {filtroPorFechas === 'busquedaDia' && (
                         <>

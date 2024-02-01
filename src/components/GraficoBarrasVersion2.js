@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BarChart, CartesianGrid, ResponsiveContainer, XAxis,Bar, YAxis, Tooltip, Legend } from 'recharts'
 import { Dropdown } from 'primereact/dropdown';
 
+
 //Array que alimenta el grafico de barras.
 const Santander = [
     {name:"Juan", age: 10, weight:80, fecha: "2024-01-04"},
@@ -32,8 +33,10 @@ const meses = [
     "07", "08", "09", "10", "11", "12"
   ];
 
+  
+
   //Componente que dibuja el grafico de barras.
-const GraficoBarrasReChart = () => {
+ const GraficoBarrasReChart = () => {
 
     const [currentData, setCurrentData] = useState(Santander);
     // const [selectedDate, setSelectedDate] = useState("");
@@ -51,17 +54,13 @@ const GraficoBarrasReChart = () => {
     console.log("showPlaceholder:", showPlaceholder); 
     };
     
-    // const filroDiaEspecifico = currentData.filter(item => item.fecha === selectedDate);
 
-    //Otra forma de hacer el filtrado de fechas con variables axuliares
     const filtrarPorFecha = (item, filtroPorFechas,rangoFechas) => {
         const fechaActual = new Date();
         const anioActual = fechaActual.getFullYear();
-        // const mesActual = fechaActual.getMonth() + 1;
 
         switch (filtroPorFechas) {
             case "mes":
-            // return item.fecha.split("-")[1] === `${mesActual}`;
             return mesSeleccionado === "" ? true : item.fecha.split("-")[1] === mesSeleccionado;
             case "rangoFechas":
             const desde = new Date(rangoFechas.desde);
@@ -88,24 +87,6 @@ const GraficoBarrasReChart = () => {
       });
 
 
-    //  const filroDiaEspecifico = filtroPorMes && mesSeleccionado ? currentData.filter(item => item.fecha.split("-")[1] === mesSeleccionado) : currentData;
-
-     const [selectedCity, setSelectedCity] = useState(null);
-     const Itau = [
-        {name:"Juan", age: 10, weight:80, fecha: "2024-01-04"},
-        {name:"Carmen", age:11, weight:60, fecha: "2024-01-10"},
-        {name:"Matias", age:13, weight:65, fecha: "2024-01-11",},
-        {name:"Miguel", age:15, weight:70, fecha: "2024-01-10"},
-        {name:"Ruben", age:17, weight:75, fecha: "2024-01-11"},
-        {name:"Pedro", age:19, weight:85, fecha: "2024-01-04"},
-        {name:"Juan2", age:19, weight:85, fecha: "2023-01-04"},
-        {name:"Juan3", age:19, weight:85, fecha: "2023-12-29"},
-        {name:"Pedro", age:29, weight:105, fecha: "2021-12-29"},
-        {name:"Claudio", age:25, weight:75, fecha: "2022-12-29"},
-    ]
-    
-
-
     return(
         <div>
             <select onChange={toggleDataPrueba}>
@@ -113,8 +94,6 @@ const GraficoBarrasReChart = () => {
                 <option value="Falabella">Falabella</option>
             </select>
 
-            {/* <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={Itau} optionLabel="name" 
-                placeholder="Select a City" className="w-full md:w-14rem"  /> */}
             <br></br>
 
             <select onChange={(event) => setFiltroPorFechas(event.target.value)}>
@@ -155,9 +134,6 @@ const GraficoBarrasReChart = () => {
                     </>
                 )}
 
-        
-            {/* <input type="date" value={filroDiaEspecifico} onChange={e => setSelectedDate(e.target.value)} /> */}
-
             <ResponsiveContainer width="100%" aspect={1.5}>
                 <BarChart 
                 data={TiposFechas} 
@@ -183,7 +159,6 @@ const GraficoBarrasReChart = () => {
                         <Legend/>
                         <Bar dataKey="weight" fill="#6b48ff"/>
                         <Bar dataKey= "age" fill="#1ee3cf" />
-                        {/* <Bar dataKey= "fecha" fill="#6b48ff" /> */}
                     </>
                 )}
                 </BarChart>
